@@ -25,7 +25,8 @@ IonicModule
   '$timeout',
   '$ionicViewSwitcher',
   '$ionicNavViewDelegate',
-function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $ionicNavViewDelegate) {
+  '$ionicConfig',
+function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $ionicNavViewDelegate, $ionicConfig) {
 
   // history actions while navigating views
   var ACTION_INITIAL_VIEW = 'initialView';
@@ -587,6 +588,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
         currentHistory.cursor = newCursor;
         setNavViews(currentHistory.stack[newCursor].viewId);
 
+        if (!$ionicConfig.views.forwardCache()) {
         var cursor = newCursor - 1;
         var clearStateIds = [];
         var fwdView = getViewById(currentHistory.stack[cursor].forwardViewId);
@@ -602,6 +604,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
           $timeout(function() {
             self.clearCache(clearStateIds);
           }, 300);
+        }
         }
       }
 
