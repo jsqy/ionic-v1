@@ -2045,6 +2045,8 @@ ionic.views.Scroll = ionic.views.View.inherit({
             if (!self.__refreshActive) {
               self.__startDeceleration(timeStamp);
             }
+          } else {
+            self.__scrollingComplete();
           }
         } else {
           self.__scrollingComplete();
